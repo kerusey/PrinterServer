@@ -78,7 +78,7 @@ def main():
 						try:
 							if (not item.split(".")[1] in ignoredExtensions):
 								print(item)
-								#printServer(currentMessageObject['destinationPath'] + "/" + item)
+								printServer(currentMessageObject['destinationPath'] + "/" + item)
 						except Exception:
 							pass
 		else:
