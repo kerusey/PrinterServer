@@ -1,1 +1,2 @@
 # PrinterServer
+This is a small project on python aimed to provide a smart printer server based on cups and mail server. The process is quiet simple: you are writing an email with an attachments like image, docs, txt etc.. After a minute of a delay you'll get your page printed.  
