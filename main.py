@@ -1,16 +1,13 @@
 #!/usr/bin/python3
-from escpos.printer import Usb
-import subprocess
+import cups
 import os
 
-def getPrinterInfo(model:str="HP"):
-	usbDevices = str(subprocess.check_output(['lsusb'])).split("\\n")
-	usbDevices[0] = usbDevices[0][2:]
-	del usbDevices[-1]
-	for device in usbDevices:
-		if (device.find(model) != -1):
-			return [int(pole, 16) for pole in device.split("ID")[1].split(model)[0][1:-1].split(":")]
+baseDir = os.path.dirname(os.path.abspath(__file__)) + "/"
 
-p = Usb(*getPrinterInfo(), 0)
-p.text("Hello World\n")
-p.cut()
+def printServer(fullFileNameToBePrinted:str, description:str = "maintance"): # 
+	connection = cups.Connection()
+	printerName = [item for item in connection.getPrinters()][0]
+
+	connection.printFile(printerName, fullFileNameToBePrinted, description, {})
+
+printServer(baseDir + "name.txt")
