@@ -88,6 +88,6 @@ def main():
 
 		shutil.rmtree(casheFolder)
 		os.mkdir(casheFolder)
-		open("settings.txt", "w").write(str(messagesInMail + 1))
+		open(baseDir + "settings.txt", "w").write(str(messagesInMail + 1))
 
 main()
