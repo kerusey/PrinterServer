@@ -11,8 +11,8 @@ import time
 from random import choice
 from string import ascii_lowercase
 
-EmailCredits = json.load(open("EmailCredits.json"))
 baseDir = os.path.dirname(os.path.abspath(__file__)) + "/"
+EmailCredits = json.load(open(baseDir + "EmailCredits.json"))
 ignoredExtensions = ["html", "css", "pyc"]
 
 # Setting up email server
@@ -22,6 +22,8 @@ if not os.path.isdir(casheFolder):
 imap = imaplib.IMAP4_SSL("imap.gmail.com")
 imap.login(EmailCredits['login'], EmailCredits['password']) # loggining
 # Setting up email server
+
+print("Server has been configured!\nProcessing listening to your mail...")
 
 def genRandomString(length:int=15):
 	return ''.join(choice(ascii_lowercase) for i in range(length))
@@ -66,7 +68,7 @@ def getMessageObject(number:int):
 
 def main():
 	while(True):
-		currentNumberQueue = int(open("settings.txt").read())
+		currentNumberQueue = int(open(baseDir + "settings.txt").read())
 		messagesInMail = int(imap.select("INBOX")[1][0])
 
 		if (currentNumberQueue <= messagesInMail):
