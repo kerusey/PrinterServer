@@ -4,7 +4,6 @@ import os
 import imaplib
 import email
 from email.header import decode_header
-import webbrowser
 import json
 import shutil
 import time
@@ -36,7 +35,7 @@ def printServer(fullFileNameToBePrinted:str, description:str = "maintance"): # W
 
 def getMessageObject(number:int):
 	messageObject = {}
-	messagesNumber = int(imap.select("INBOX")[1][0])
+	# messagesNumber = int(imap.select("INBOX")[1][0])
 	status, message = imap.fetch(str(number), "(RFC822)")
 	for resource in message:
 		if isinstance(resource, tuple):
@@ -51,7 +50,7 @@ def getMessageObject(number:int):
 			messageObject['destinationPath'] = casheFolder + "/" + genRandomString()
 			if message.is_multipart():
 				for part in message.walk():
-					contentType = part.get_content_type()
+					# contentType = part.get_content_type()
 					contentDisposition = str(part.get("Content-Disposition"))
 					try:
 						body = part.get_payload(decode=True).decode()
